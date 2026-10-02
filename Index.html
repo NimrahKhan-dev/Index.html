@@ -1,0 +1,861 @@
+<!DOCTYPE html>
+<html lang="en" data-bs-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nimrah Zulfiqar | Full-Stack & Agentic AI Developer</title>
+
+    <!-- Bootstrap 5 CSS CDN -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- FontAwesome CDN -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts (Inter & Fira Code) -->
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;600&family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --bg-color: #0d1117;
+            --card-bg: rgba(22, 27, 34, 0.75);
+            --card-border: rgba(255, 255, 255, 0.1);
+            --text-main: #f0f6fc;
+            --text-muted: #8b949e;
+            --primary-accent: #8b5cf6;
+            --secondary-accent: #06b6d4;
+            --gradient-accent: linear-gradient(135deg, #8b5cf6 0%, #06b6d4 100%);
+            --glow-color: rgba(139, 92, 246, 0.25);
+            --terminal-bg: #090d13;
+        }
+
+        [data-bs-theme="light"] {
+            --bg-color: #f8fafc;
+            --card-bg: rgba(255, 255, 255, 0.85);
+            --card-border: rgba(0, 0, 0, 0.08);
+            --text-main: #0f172a;
+            --text-muted: #64748b;
+            --primary-accent: #7c3aed;
+            --secondary-accent: #0284c7;
+            --gradient-accent: linear-gradient(135deg, #7c3aed 0%, #0284c7 100%);
+            --glow-color: rgba(124, 58, 237, 0.15);
+            --terminal-bg: #1e293b;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            overflow-x: hidden;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+
+        /* Glassmorphism Styling */
+        .glass-card {
+            background: var(--card-bg);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid var(--card-border);
+            border-radius: 16px;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .glass-card:hover {
+            border-color: rgba(139, 92, 246, 0.4);
+            transform: translateY(-4px);
+            box-shadow: 0 12px 30px var(--glow-color);
+        }
+
+        /* FIX: modal pe hover movement band */
+        .modal-content.glass-card:hover {
+            transform: none;
+            box-shadow: none;
+        }
+
+        /* Gradient Text */
+        .gradient-text {
+            background: var(--gradient-accent);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        /* Custom Buttons */
+        .btn-gradient {
+            background: var(--gradient-accent);
+            color: #ffffff !important;
+            border: none;
+            border-radius: 30px;
+            padding: 10px 26px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px var(--glow-color);
+        }
+
+        .btn-gradient:hover {
+            opacity: 0.92;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px var(--glow-color);
+        }
+
+        .btn-outline-custom {
+            border: 2px solid var(--primary-accent);
+            color: var(--text-main);
+            border-radius: 30px;
+            padding: 8px 24px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .btn-outline-custom:hover {
+            background: var(--gradient-accent);
+            color: #ffffff;
+            border-color: transparent;
+        }
+
+        .hover-accent:hover {
+            color: var(--primary-accent) !important;
+        }
+
+        /* Navbar Styling */
+        .navbar-custom {
+            background: rgba(13, 17, 23, 0.85);
+            backdrop-filter: blur(15px);
+            border-bottom: 1px solid var(--card-border);
+            transition: all 0.3s ease;
+        }
+
+        [data-bs-theme="light"] .navbar-custom {
+            background: rgba(248, 250, 252, 0.85);
+        }
+
+        .nav-link {
+            color: var(--text-muted) !important;
+            font-weight: 500;
+            margin: 0 8px;
+            transition: color 0.3s ease;
+        }
+
+        .nav-link:hover, .nav-link.active {
+            color: var(--primary-accent) !important;
+        }
+
+        /* Badge Grid */
+        .skill-badge {
+            background: rgba(139, 92, 246, 0.08);
+            border: 1px solid rgba(139, 92, 246, 0.2);
+            color: var(--text-main);
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            margin: 4px;
+            transition: all 0.25s ease;
+        }
+
+        .skill-badge:hover {
+            background: var(--gradient-accent);
+            color: #fff;
+            transform: scale(1.05);
+        }
+
+        /* Project Filters */
+        .filter-btn {
+            background: transparent;
+            border: 1px solid var(--card-border);
+            color: var(--text-muted);
+            padding: 6px 18px;
+            border-radius: 20px;
+            margin: 3px;
+            transition: all 0.3s ease;
+        }
+
+        .filter-btn.active, .filter-btn:hover {
+            background: var(--gradient-accent);
+            color: #ffffff;
+            border-color: transparent;
+        }
+
+        /* Terminal Window */
+        .terminal-box {
+            background-color: var(--terminal-bg);
+            border-radius: 12px;
+            border: 1px solid var(--card-border);
+            font-family: 'Fira Code', monospace;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+            overflow: hidden;
+        }
+
+        .terminal-header {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 10px 16px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            border-bottom: 1px solid var(--card-border);
+        }
+
+        .terminal-dots span {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            display: inline-block;
+            margin-right: 6px;
+        }
+
+        .dot-red { background: #ff5f56; }
+        .dot-yellow { background: #ffbd2e; }
+        .dot-green { background: #27c93f; }
+
+        .terminal-body {
+            padding: 16px;
+            height: 280px;
+            overflow-y: auto;
+            color: #00ff9d;
+            font-size: 0.88rem;
+        }
+
+        .terminal-input {
+            background: transparent;
+            border: none;
+            outline: none;
+            color: #ffffff;
+            font-family: 'Fira Code', monospace;
+            width: 70%;
+        }
+
+        /* Timeline Styling */
+        .timeline {
+            position: relative;
+            padding-left: 30px;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 10px;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: var(--gradient-accent);
+        }
+
+        .timeline-item {
+            position: relative;
+            margin-bottom: 30px;
+        }
+
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -25px;
+            top: 5px;
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: var(--primary-accent);
+            box-shadow: 0 0 10px var(--primary-accent);
+        }
+
+        /* Cursor blinking effect */
+        .typing-cursor {
+            display: inline-block;
+            width: 3px;
+            background-color: var(--primary-accent);
+            animation: blink 1s infinite;
+        }
+
+        @keyframes blink {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Sticky Navigation Bar -->
+    <nav class="navbar navbar-expand-lg fixed-top navbar-custom">
+        <div class="container">
+            <a class="navbar-brand fw-bold fs-4 text-decoration-none text-reset" href="#home">
+                <i class="fa-solid fa-code me-2 text-primary"></i>Nimrah<span class="gradient-text"> Zulfiqar</span>
+            </a>
+            <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-label="Toggle navigation">
+                <i class="fa-solid fa-bars" style="color: var(--text-main);"></i>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto align-items-center">
+                    <li class="nav-item"><a class="nav-link" href="#home">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#skills">Skills</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#projects">Projects</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#terminal">Console</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#experience">Experience</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#contact">Contact</a></li>
+                    <li class="nav-item ms-lg-3 mt-2 mt-lg-0">
+                        <button class="btn btn-sm btn-outline-custom border-0 rounded-circle p-2" id="themeToggleBtn" title="Toggle Theme">
+                            <i class="fa-solid fa-moon text-primary" id="themeIcon"></i>
+                        </button>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="min-vh-100 d-flex align-items-center pt-5">
+        <div class="container">
+            <div class="row align-items-center gy-5">
+                <div class="col-lg-7">
+                    <div class="badge px-3 py-2 rounded-pill bg-body-tertiary border border-secondary border-opacity-25 mb-3">
+                        <i class="fa-solid fa-circle text-success me-2 fs-6"></i> Available for Dynamic Tech Roles
+                    </div>
+                    <h1 class="display-3 fw-bold mb-3">
+                        Hi, I'm Nimrah.<br>
+                        <span id="typedText" class="gradient-text"></span><span class="typing-cursor">&nbsp;</span>
+                    </h1>
+                    <p class="lead text-muted mb-4 fs-5" style="max-width: 600px;">
+                        Building Scalable Web Apps, High-Performance APIs & Agentic AI Solutions. Specializing in modern full-stack architectures and intelligent automation systems.
+                    </p>
+                    <div class="d-flex flex-wrap gap-3 mb-4">
+                        <a href="#projects" class="btn btn-gradient"><i class="fa-solid fa-rocket me-2"></i>View Projects</a>
+                        <a href="#contact" class="btn btn-outline-custom"><i class="fa-solid fa-paper-plane me-2"></i>Contact Me</a>
+                    </div>
+                    <div class="d-flex align-items-center gap-3">
+                        <span class="text-muted small">Connect:</span>
+                        <a href="https://github.com" target="_blank" rel="noopener" class="text-muted fs-5 hover-accent"><i class="fa-brands fa-github"></i></a>
+                        <a href="https://linkedin.com" target="_blank" rel="noopener" class="text-muted fs-5 hover-accent"><i class="fa-brands fa-linkedin"></i></a>
+                        <a href="mailto:nimrah@example.com" class="text-muted fs-5 hover-accent"><i class="fa-solid fa-envelope"></i></a>
+                    </div>
+                </div>
+                <div class="col-lg-5 text-center">
+                    <div class="position-relative d-inline-block">
+                        <div class="glass-card p-4 text-start shadow-lg">
+                            <div class="d-flex align-items-center gap-3 mb-3">
+                                <div class="bg-primary bg-opacity-20 p-3 rounded-circle text-primary">
+                                    <i class="fa-solid fa-microchip fs-3"></i>
+                                </div>
+                                <div>
+                                    <h6 class="mb-0 fw-bold">Current Focus</h6>
+                                    <small class="text-muted">Agentic AI & FastAPI Systems</small>
+                                </div>
+                            </div>
+                            <hr class="opacity-25">
+                            <div class="d-flex justify-content-between text-muted small mb-1">
+                                <span>API Architecture</span>
+                                <span class="text-success">98%</span>
+                            </div>
+                            <div class="progress mb-3" style="height: 6px;">
+                                <div class="progress-bar bg-info" style="width: 98%"></div>
+                            </div>
+                            <div class="d-flex justify-content-between text-muted small mb-1">
+                                <span>Agentic AI Workflows</span>
+                                <span class="text-primary">92%</span>
+                            </div>
+                            <div class="progress" style="height: 6px;">
+                                <div class="progress-bar bg-primary" style="width: 92%"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Skills & Tech Stack Showcase -->
+    <section id="skills" class="py-5">
+        <div class="container">
+            <div class="text-center mb-5">
+                <h2 class="fw-bold fs-1">Tech <span class="gradient-text">Stack & Skills</span></h2>
+                <p class="text-muted">High-level tools and frameworks powering my development pipeline</p>
+            </div>
+
+            <div class="row g-4">
+                <!-- Frontend -->
+                <div class="col-md-6 col-lg-3">
+                    <div class="glass-card p-4 h-100">
+                        <div class="text-primary mb-3"><i class="fa-solid fa-code fs-2"></i></div>
+                        <h5 class="fw-bold mb-3">Frontend Dev</h5>
+                        <div>
+                            <span class="skill-badge"><i class="fa-brands fa-html5 text-danger"></i> HTML5</span>
+                            <span class="skill-badge"><i class="fa-brands fa-css3-alt text-primary"></i> CSS3</span>
+                            <span class="skill-badge"><i class="fa-brands fa-bootstrap" style="color:#7952b3;"></i> Bootstrap 5</span>
+                            <span class="skill-badge"><i class="fa-brands fa-js text-warning"></i> JS (ES6+)</span>
+                            <span class="skill-badge"><i class="fa-solid fa-laptop-code"></i> Dynamic DOM</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Backend & APIs -->
+                <div class="col-md-6 col-lg-3">
+                    <div class="glass-card p-4 h-100">
+                        <div class="text-info mb-3"><i class="fa-solid fa-server fs-2"></i></div>
+                        <h5 class="fw-bold mb-3">Backend & APIs</h5>
+                        <div>
+                            <span class="skill-badge"><i class="fa-brands fa-python text-warning"></i> Python</span>
+                            <span class="skill-badge"><i class="fa-solid fa-bolt text-warning"></i> FastAPI</span>
+                            <span class="skill-badge"><i class="fa-solid fa-network-wired"></i> REST APIs</span>
+                            <span class="skill-badge"><i class="fa-solid fa-shield-halved"></i> Pydantic</span>
+                            <span class="skill-badge"><i class="fa-solid fa-cubes"></i> Microservices</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Databases & DevOps -->
+                <div class="col-md-6 col-lg-3">
+                    <div class="glass-card p-4 h-100">
+                        <div class="text-success mb-3"><i class="fa-solid fa-database fs-2"></i></div>
+                        <h5 class="fw-bold mb-3">Databases & DevOps</h5>
+                        <div>
+                            <span class="skill-badge"><i class="fa-solid fa-leaf text-success"></i> MongoDB</span>
+                            <span class="skill-badge"><i class="fa-brands fa-docker text-primary"></i> Docker</span>
+                            <span class="skill-badge"><i class="fa-brands fa-git-alt text-danger"></i> Git</span>
+                            <span class="skill-badge"><i class="fa-brands fa-github"></i> Actions</span>
+                            <span class="skill-badge"><i class="fa-solid fa-terminal"></i> Bash & Linux</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Advanced AI -->
+                <div class="col-md-6 col-lg-3">
+                    <div class="glass-card p-4 h-100">
+                        <div class="text-warning mb-3"><i class="fa-solid fa-brain fs-2"></i></div>
+                        <h5 class="fw-bold mb-3">Agentic AI & VLMs</h5>
+                        <div>
+                            <span class="skill-badge"><i class="fa-solid fa-robot"></i> Agentic AI</span>
+                            <span class="skill-badge"><i class="fa-solid fa-link"></i> LangChain</span>
+                            <span class="skill-badge"><i class="fa-solid fa-people-group"></i> CrewAI</span>
+                            <span class="skill-badge"><i class="fa-solid fa-eye"></i> VLMs</span>
+                            <span class="skill-badge"><i class="fa-solid fa-diagram-project"></i> LLMs</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Featured Projects Section -->
+    <section id="projects" class="py-5">
+        <div class="container">
+            <div class="text-center mb-4">
+                <h2 class="fw-bold fs-1">Featured <span class="gradient-text">Projects</span></h2>
+                <p class="text-muted">A collection of full-stack, AI-driven, and automation systems</p>
+
+                <!-- Filter Buttons -->
+                <div class="d-flex justify-content-center flex-wrap gap-2 mt-4">
+                    <button class="filter-btn active" onclick="filterProjects('all', this)">All Projects</button>
+                    <button class="filter-btn" onclick="filterProjects('fullstack', this)">Full-Stack / Backend</button>
+                    <button class="filter-btn" onclick="filterProjects('ai', this)">AI Systems</button>
+                    <button class="filter-btn" onclick="filterProjects('devops', this)">DevOps & Cloud</button>
+                </div>
+            </div>
+
+            <div class="row g-4 mt-2" id="projectGrid">
+                <!-- Project 1 -->
+                <div class="col-md-6 project-card" data-category="ai">
+                    <div class="glass-card p-4 h-100 d-flex flex-column justify-content-between">
+                        <div>
+                            <div class="d-flex justify-content-between align-items-start mb-3">
+                                <span class="badge bg-primary bg-opacity-20 text-primary">AI Systems</span>
+                                <i class="fa-solid fa-robot fs-4 text-muted"></i>
+                            </div>
+                            <h4 class="fw-bold">Autonomous AI Research & Summary Agent</h4>
+                            <p class="text-muted small">An intelligent agentic system that browses, synthesizes, and compiles research summaries autonomously using LLMs and modern web scraping pipelines.</p>
+                            <div class="mb-3">
+                                <span class="badge bg-secondary opacity-75">FastAPI</span>
+                                <span class="badge bg-secondary opacity-75">MongoDB</span>
+                                <span class="badge bg-secondary opacity-75">LangChain</span>
+                                <span class="badge bg-secondary opacity-75">Python</span>
+                            </div>
+                        </div>
+                        <div class="d-flex gap-2 mt-3">
+                            <button class="btn btn-sm btn-outline-custom w-100" onclick="showDemoModal('Autonomous AI Research Agent', 'FastAPI, LangChain, Python', 'https://github.com')"><i class="fa-solid fa-eye me-1"></i> Quick View</button>
+                            <a href="https://github.com" target="_blank" rel="noopener" class="btn btn-sm btn-gradient w-100"><i class="fa-brands fa-github me-1"></i> GitHub</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Project 2 -->
+                <div class="col-md-6 project-card" data-category="fullstack">
+                    <div class="glass-card p-4 h-100 d-flex flex-column justify-content-between">
+                        <div>
+                            <div class="d-flex justify-content-between align-items-start mb-3">
+                                <span class="badge bg-info bg-opacity-20 text-info">Full-Stack</span>
+                                <i class="fa-solid fa-wallet fs-4 text-muted"></i>
+                            </div>
+                            <h4 class="fw-bold">Full-Stack Financial & Expense Tracker App</h4>
+                            <p class="text-muted small">Real-time budget management application with REST API endpoints, user authentication, interactive expense analytics charts, and dynamic filtering.</p>
+                            <div class="mb-3">
+                                <span class="badge bg-secondary opacity-75">FastAPI</span>
+                                <span class="badge bg-secondary opacity-75">MongoDB</span>
+                                <span class="badge bg-secondary opacity-75">Bootstrap 5</span>
+                                <span class="badge bg-secondary opacity-75">Chart.js</span>
+                            </div>
+                        </div>
+                        <div class="d-flex gap-2 mt-3">
+                            <button class="btn btn-sm btn-outline-custom w-100" onclick="showDemoModal('Financial Expense Tracker', 'FastAPI, MongoDB, Bootstrap 5', 'https://github.com')"><i class="fa-solid fa-eye me-1"></i> Quick View</button>
+                            <a href="https://github.com" target="_blank" rel="noopener" class="btn btn-sm btn-gradient w-100"><i class="fa-brands fa-github me-1"></i> GitHub</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Project 3 -->
+                <div class="col-md-6 project-card" data-category="ai">
+                    <div class="glass-card p-4 h-100 d-flex flex-column justify-content-between">
+                        <div>
+                            <div class="d-flex justify-content-between align-items-start mb-3">
+                                <span class="badge bg-warning bg-opacity-20 text-warning">Vision AI</span>
+                                <i class="fa-solid fa-eye fs-4 text-muted"></i>
+                            </div>
+                            <h4 class="fw-bold">Multimodal VLM Intelligent Assistant</h4>
+                            <p class="text-muted small">Vision-Language integrated API solution capable of analyzing multimodal image inputs, triggering tool callbacks, and producing contextual reports.</p>
+                            <div class="mb-3">
+                                <span class="badge bg-secondary opacity-75">Vision Models</span>
+                                <span class="badge bg-secondary opacity-75">FastAPI</span>
+                                <span class="badge bg-secondary opacity-75">CrewAI</span>
+                                <span class="badge bg-secondary opacity-75">Docker</span>
+                            </div>
+                        </div>
+                        <div class="d-flex gap-2 mt-3">
+                            <button class="btn btn-sm btn-outline-custom w-100" onclick="showDemoModal('Multimodal VLM Assistant', 'Vision Models, CrewAI, FastAPI', 'https://github.com')"><i class="fa-solid fa-eye me-1"></i> Quick View</button>
+                            <a href="https://github.com" target="_blank" rel="noopener" class="btn btn-sm btn-gradient w-100"><i class="fa-brands fa-github me-1"></i> GitHub</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Project 4 -->
+                <div class="col-md-6 project-card" data-category="devops">
+                    <div class="glass-card p-4 h-100 d-flex flex-column justify-content-between">
+                        <div>
+                            <div class="d-flex justify-content-between align-items-start mb-3">
+                                <span class="badge bg-success bg-opacity-20 text-success">DevOps</span>
+                                <i class="fa-solid fa-server fs-4 text-muted"></i>
+                            </div>
+                            <h4 class="fw-bold">Automated DevOps CI/CD Cloud Pipeline</h4>
+                            <p class="text-muted small">Containerized environment setup featuring automated unit testing workflows, Docker hub image distribution, and Bash deployment scripts on Linux.</p>
+                            <div class="mb-3">
+                                <span class="badge bg-secondary opacity-75">Docker</span>
+                                <span class="badge bg-secondary opacity-75">GitHub Actions</span>
+                                <span class="badge bg-secondary opacity-75">Bash</span>
+                                <span class="badge bg-secondary opacity-75">Linux</span>
+                            </div>
+                        </div>
+                        <div class="d-flex gap-2 mt-3">
+                            <button class="btn btn-sm btn-outline-custom w-100" onclick="showDemoModal('DevOps CI/CD Pipeline', 'Docker, GitHub Actions, Linux', 'https://github.com')"><i class="fa-solid fa-eye me-1"></i> Quick View</button>
+                            <a href="https://github.com" target="_blank" rel="noopener" class="btn btn-sm btn-gradient w-100"><i class="fa-brands fa-github me-1"></i> GitHub</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Interactive Developer Terminal -->
+    <section id="terminal" class="py-5">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-lg-10">
+                    <div class="text-center mb-4">
+                        <h2 class="fw-bold fs-1">Developer <span class="gradient-text">Interactive Terminal</span></h2>
+                        <p class="text-muted">Type commands or click quick action buttons to query the portfolio system</p>
+                    </div>
+
+                    <div class="terminal-box">
+                        <div class="terminal-header">
+                            <div class="terminal-dots">
+                                <span class="dot-red"></span>
+                                <span class="dot-yellow"></span>
+                                <span class="dot-green"></span>
+                            </div>
+                            <small class="text-muted">nimrah@dev-system:~ (bash)</small>
+                            <div><i class="fa-solid fa-terminal text-muted"></i></div>
+                        </div>
+                        <div class="terminal-body" id="terminalOutput">
+                            <p class="mb-1">Nimrah Zulfiqar OS [Version 2.4.0-release]</p>
+                            <p class="mb-2 text-muted">Type <span class="text-warning">'help'</span> to view available system commands.</p>
+                        </div>
+                        <div class="p-3 border-top border-secondary border-opacity-25 d-flex align-items-center gap-2">
+                            <span class="text-primary fw-bold">&gt;</span>
+                            <input type="text" id="terminalInput" class="terminal-input" placeholder="Type a command (e.g. 'skills', 'about', 'clear')..." onkeydown="handleTerminalCommand(event)">
+                        </div>
+                    </div>
+
+                    <!-- Quick Command Buttons -->
+                    <div class="d-flex justify-content-center flex-wrap gap-2 mt-3">
+                        <button class="btn btn-sm btn-outline-secondary" onclick="executeCmd('about')">about</button>
+                        <button class="btn btn-sm btn-outline-secondary" onclick="executeCmd('skills')">skills</button>
+                        <button class="btn btn-sm btn-outline-secondary" onclick="executeCmd('projects')">projects</button>
+                        <button class="btn btn-sm btn-outline-secondary" onclick="executeCmd('status')">status</button>
+                        <button class="btn btn-sm btn-outline-secondary" onclick="executeCmd('clear')">clear</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Experience & Background Timeline -->
+    <section id="experience" class="py-5">
+        <div class="container">
+            <div class="text-center mb-5">
+                <h2 class="fw-bold fs-1">Experience & <span class="gradient-text">Background</span></h2>
+                <p class="text-muted">Academic track record and analytical problem-solving foundation</p>
+            </div>
+
+            <div class="row justify-content-center">
+                <div class="col-lg-8">
+                    <div class="timeline">
+                        <div class="timeline-item">
+                            <div class="glass-card p-4">
+                                <div class="d-flex justify-content-between align-items-center mb-2">
+                                    <h5 class="fw-bold mb-0">Full-Stack & Agentic AI Specialist</h5>
+                                    <span class="badge bg-primary">Present</span>
+                                </div>
+                                <p class="text-muted small mb-2">Independent Projects & Open Source</p>
+                                <p class="small text-muted mb-0">Designing robust FastAPI microservices, implementing asynchronous agentic workflows, and training/deploying multimodal vision solutions.</p>
+                            </div>
+                        </div>
+
+                        <div class="timeline-item">
+                            <div class="glass-card p-4">
+                                <div class="d-flex justify-content-between align-items-center mb-2">
+                                    <h5 class="fw-bold mb-0">Problem Solver & Tech Communicator</h5>
+                                    <span class="badge bg-secondary">MindBridge</span>
+                                </div>
+                                <p class="text-muted small mb-2">Technical Customer Relations & Problem Solving</p>
+                                <p class="small text-muted mb-0">Engineered client solutions, refined real-time problem-solving workflows, and delivered high-standard communication in technical environments.</p>
+                            </div>
+                        </div>
+
+                        <div class="timeline-item">
+                            <div class="glass-card p-4">
+                                <div class="d-flex justify-content-between align-items-center mb-2">
+                                    <h5 class="fw-bold mb-0">Bachelor of Science in Information Technology</h5>
+                                    <span class="badge bg-secondary">BS IT Degree</span>
+                                </div>
+                                <p class="text-muted small mb-2">Core IT Infrastructure & Software Fundamentals</p>
+                                <p class="small text-muted mb-0">Gained strong academic background in Object-Oriented Programming, Database Management Systems, Computer Networks, and Web Architectures.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="py-5">
+        <div class="container">
+            <div class="row g-4 align-items-center">
+                <div class="col-lg-5">
+                    <h2 class="fw-bold fs-1 mb-3">Let's Work <span class="gradient-text">Together</span></h2>
+                    <p class="text-muted mb-4">Have an ambitious project, backend API requirement, or AI solution in mind? Reach out and let's discuss details.</p>
+
+                    <div class="d-flex align-items-center gap-3 mb-3">
+                        <div class="bg-primary bg-opacity-20 p-3 rounded-circle text-primary">
+                            <i class="fa-solid fa-envelope fs-5"></i>
+                        </div>
+                        <div>
+                            <small class="text-muted d-block">Direct Email</small>
+                            <span class="fw-semibold">nimrah.zulfiqar@example.com</span>
+                        </div>
+                    </div>
+
+                    <div class="d-flex align-items-center gap-3 mb-3">
+                        <div class="bg-info bg-opacity-20 p-3 rounded-circle text-info">
+                            <i class="fa-solid fa-location-dot fs-5"></i>
+                        </div>
+                        <div>
+                            <small class="text-muted d-block">Location</small>
+                            <span class="fw-semibold">Lahore, Pakistan (Remote Available)</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-7">
+                    <div class="glass-card p-4 p-md-5">
+                        <h4 class="fw-bold mb-4">Send a Message</h4>
+                        <form id="contactForm" onsubmit="handleFormSubmit(event)">
+                            <div class="row g-3">
+                                <div class="col-md-6">
+                                    <label class="form-label small text-muted">Your Name</label>
+                                    <input type="text" id="senderName" class="form-control bg-body border-secondary border-opacity-25" placeholder="John Doe" required>
+                                </div>
+                                <div class="col-md-6">
+                                    <label class="form-label small text-muted">Your Email</label>
+                                    <input type="email" id="senderEmail" class="form-control bg-body border-secondary border-opacity-25" placeholder="john@example.com" required>
+                                </div>
+                                <div class="col-12">
+                                    <label class="form-label small text-muted">Subject</label>
+                                    <input type="text" id="senderSubject" class="form-control bg-body border-secondary border-opacity-25" placeholder="Project Discussion" required>
+                                </div>
+                                <div class="col-12">
+                                    <label class="form-label small text-muted">Message</label>
+                                    <textarea id="senderMessage" class="form-control bg-body border-secondary border-opacity-25" rows="4" placeholder="Hello Nimrah, I'd like to talk about..." required></textarea>
+                                </div>
+                                <div class="col-12 mt-4">
+                                    <button type="submit" class="btn btn-gradient w-100 py-2"><i class="fa-solid fa-paper-plane me-2"></i>Send Message</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="py-4 border-top border-secondary border-opacity-25 mt-5">
+        <div class="container text-center">
+            <p class="text-muted small mb-0">&copy; 2026 Nimrah Zulfiqar. Crafted with HTML5, Bootstrap 5 & JavaScript.</p>
+        </div>
+    </footer>
+
+    <!-- Project Quick View Modal -->
+    <div class="modal fade" id="projectModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content glass-card border-0">
+                <div class="modal-header border-bottom border-secondary border-opacity-25">
+                    <h5 class="modal-title fw-bold" id="modalTitle">Project Details</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body" id="modalBody">
+                    <!-- Dynamic modal content -->
+                </div>
+                <div class="modal-footer border-top border-secondary border-opacity-25">
+                    <button type="button" class="btn btn-sm btn-outline-secondary" data-bs-dismiss="modal">Close</button>
+                    <a href="https://github.com" target="_blank" rel="noopener" class="btn btn-sm btn-gradient">GitHub Repo</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap JS Bundle -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
+    <script>
+        const roles = ["Full-Stack Developer", "Backend & API Engineer", "Agentic AI Specialist"];
+        let roleIndex = 0;
+        let charIndex = 0;
+        let isDeleting = false;
+        const typedTextElement = document.getElementById("typedText");
+
+        function typeEffect() {
+            const currentRole = roles[roleIndex];
+            if (isDeleting) {
+                typedTextElement.textContent = currentRole.substring(0, charIndex - 1);
+                charIndex--;
+            } else {
+                typedTextElement.textContent = currentRole.substring(0, charIndex + 1);
+                charIndex++;
+            }
+
+            let speed = isDeleting ? 40 : 80;
+
+            if (!isDeleting && charIndex === currentRole.length) {
+                speed = 2000; // Pause at end
+                isDeleting = true;
+            } else if (isDeleting && charIndex === 0) {
+                isDeleting = false;
+                roleIndex = (roleIndex + 1) % roles.length;
+                speed = 500;
+            }
+
+            setTimeout(typeEffect, speed);
+        }
+
+        const themeToggleBtn = document.getElementById("themeToggleBtn");
+        const themeIcon = document.getElementById("themeIcon");
+        const htmlTag = document.documentElement;
+
+        themeToggleBtn.addEventListener("click", () => {
+            const currentTheme = htmlTag.getAttribute("data-bs-theme");
+            const newTheme = currentTheme === "dark" ? "light" : "dark";
+            htmlTag.setAttribute("data-bs-theme", newTheme);
+
+            if (newTheme === "light") {
+                themeIcon.classList.remove("fa-moon");
+                themeIcon.classList.add("fa-sun");
+            } else {
+                themeIcon.classList.remove("fa-sun");
+                themeIcon.classList.add("fa-moon");
+            }
+        });
+
+        function filterProjects(category, btn) {
+            const cards = document.querySelectorAll(".project-card");
+            document.querySelectorAll(".filter-btn").forEach(b => b.classList.remove("active"));
+            btn.classList.add("active");
+
+            cards.forEach(card => {
+                card.style.display =
+                    (category === "all" || card.dataset.category === category) ? "block" : "none";
+            });
+        }
+
+        function escapeHtml(str) {
+            const d = document.createElement('div');
+            d.textContent = str;
+            return d.innerHTML;
+        }
+
+        function handleTerminalCommand(e) {
+            if (e.key === 'Enter') {
+                const input = e.target.value.trim().toLowerCase();
+                e.target.value = '';
+                if (!input) return;
+                executeCmd(input);
+            }
+        }
+
+        function executeCmd(cmd) {
+            const output = document.getElementById("terminalOutput");
+            let response = "";
+
+            switch (cmd) {
+                case 'help':
+                    response = "Available commands: <br>- <b>about</b>: Short biography<br>- <b>skills</b>: Tech capabilities<br>- <b>projects</b>: Featured work<br>- <b>status</b>: System check<br>- <b>clear</b>: Clear output";
+                    break;
+                case 'about':
+                    response = "Nimrah Zulfiqar is a Full-Stack & Agentic AI Specialist focused on scalable APIs, Python microservices, and modern UI workflows.";
+                    break;
+                case 'skills':
+                    response = "Python, FastAPI, MongoDB, Docker, LangChain, HTML5/CSS3, JavaScript, Bootstrap 5, Git/GitHub Actions.";
+                    break;
+                case 'projects':
+                    response = "1. Autonomous AI Agent<br>2. Financial Tracker<br>3. Multimodal VLM Assistant<br>4. Cloud CI/CD Pipeline";
+                    break;
+                case 'status':
+                    response = "[SYSTEM OPTIMAL]: All microservices and APIs operational. Response time: 24ms.";
+                    break;
+                case 'clear':
+                    output.innerHTML = "";
+                    return;
+                default:
+                    response = `Command not recognized: '${escapeHtml(cmd)}'. Type <span class="text-warning">'help'</span>.`;
+            }
+
+            output.innerHTML += `<div class="mt-2"><span class="text-primary">&gt; ${escapeHtml(cmd)}</span><br><span>${response}</span></div>`;
+            output.scrollTop = output.scrollHeight;
+        }
+
+        function showDemoModal(title, techStack, repoUrl) {
+            document.getElementById("modalTitle").textContent = title;
+            document.getElementById("modalBody").innerHTML = `
+                <p><b>Architecture Highlights:</b> Built with high performance, modular code structure, and automated deployment readiness.</p>
+                <p><b>Tech Stack:</b> ${techStack}</p>
+                <div class="alert alert-info py-2 small">Live sandbox environment initialized. All endpoints pass health checks.</div>
+            `;
+            bootstrap.Modal.getOrCreateInstance(document.getElementById('projectModal')).show();
+        }
+
+        function handleFormSubmit(e) {
+            e.preventDefault();
+            const name = document.getElementById("senderName").value;
+            alert(`Thank you ${name}! Your message has been recorded. (Demo dynamic form submission)`);
+            document.getElementById("contactForm").reset();
+        }
+
+        // Initialize typing loop on DOM load
+        window.onload = function() {
+            typeEffect();
+        };
+    </script>
+</body>
+</html>
